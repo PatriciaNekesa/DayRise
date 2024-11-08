@@ -45,7 +45,7 @@ The main dependencies include SQLAlchemy for database management, requests for H
 
 Prepare Excel File: Place your Excel file (e.g., Dayrize_Automation_Database.xlsx) in the project directory.
 
-Run the ETL Process: Execute the main notebook to import data sources, scrape websites, and store the data.
+Run the ETL Process by running the **002_Database_engineering.ipynb**: Execute the main notebook to import data sources, scrape websites, and store the data.
 
 ### Code Overview
 #### Key Functions
