@@ -24,9 +24,13 @@ The database is organized in two tables:
 The DataSource table acts as a central reference for all data sources, while WebsiteData captures relevant scraped content for each URL, enabling clear and structured access to each website’s data.
 
 ## Files and Folders
+**001_Data_Exploration.ipynb**: Contains the initial exploration of the data to understand what it contains.
+
 **utils.py**
 1. Defines the DataSource and WebsiteData models and their relationships.
 2. Contains the main ETL logic, including functions to load URLs from Excel, assign unique IDs, perform scraping, and store data in the database.
+
+**002_Database_engineering.ipynb** : This executes all the logic created in the utils file.
 
 **company_data.db** : SQLite database where all data is stored.
 
