@@ -4,6 +4,37 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+
+engine = create_engine('sqlite:///company_data.db')
+# Setup session
+Session = sessionmaker(bind=engine)
+session = Session()
+Base = declarative_base()
+
+# Define DataSource model
+class DataSource(Base):
+    __tablename__ = 'datasources'
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False)
+    url = Column(String, unique=True, nullable=False)
+
+# WebsiteData Table
+class WebsiteData(Base):
+    __tablename__ = 'website_data'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    source_id = Column(String, ForeignKey('datasources.id'), nullable=False)
+    data = Column(Text, nullable=True)  # Store scraped data
+
+    # Relationship with DataSource
+    source = relationship("DataSource", back_populates="data_entries")
+
+# Link relationship in DataSource for querying related data
+DataSource.data_entries = relationship("WebsiteData", back_populates="source")
+
+# Create the table
+Base.metadata.create_all(engine)
+
 
 
 # Function to add  data source URLs to the database, avoiding duplicates
@@ -55,7 +86,7 @@ def scrape_and_store_data(source_id, url):
         print(f"Failed to scrape {url}: {e}")
 
 # Function to iterate through all data sources and scrape data where possible
-def scrape_all_sources():
+def scrape_all_sources(number=10):
     # Query all entries in the DataSource table
     data_sources = session.query(DataSource).all()
 

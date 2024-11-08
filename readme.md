@@ -24,9 +24,11 @@ The database is organized in two tables:
 The DataSource table acts as a central reference for all data sources, while WebsiteData captures relevant scraped content for each URL, enabling clear and structured access to each website’s data.
 
 ## Files and Folders
-**utils.py* : Contains the main ETL logic, including functions to load URLs from Excel, assign unique IDs, perform scraping, and store data in the database.
-**data.ipynb*: Defines the DataSource and WebsiteData models and their relationships.
-**company_data.db*: SQLite database where all data is stored.
+**utils.py**
+1. Defines the DataSource and WebsiteData models and their relationships.
+2. Contains the main ETL logic, including functions to load URLs from Excel, assign unique IDs, perform scraping, and store data in the database.
+
+**company_data.db** : SQLite database where all data is stored.
 
 ## Installation and Setup
 Clone the Repository:
@@ -48,10 +50,10 @@ Run the ETL Process: Execute the main notebook to import data sources, scrape we
 **scrape_all_sources**: A loop function that iterates over all data sources, scraping each one and adding data to the database if it’s accessible.
 
 ### Challenges and Solutions
-**Data Uniqueness**: Ensuring each URL has a unique ID. Solution: UUIDs provide robust unique identifiers.
-**Scrapability of Websites**: Not all websites allow scraping. Solution: The script skips URLs that are inaccessible or return errors, with error handling and logging for review.
+1. Data Uniqueness: Ensuring each URL has a unique ID. Solution: UUIDs provide robust unique identifiers.
+2. Scrapability of Websites : Not all websites allow scraping. Solution: The script skips URLs that are inaccessible or return errors, with error handling and logging for review.
 
 ### Future Enhancements
-**Data Extraction Logic** : Update scraping logic to handle all data soruces access logic. 
-**Scraping Schedule**: Implement a scheduling mechanism to periodically scrape and update data.
-**Data Lake Integration**: In larger setups, integrate with a data lake for scalable storage and processing.
+1. Data Extraction Logic : Update scraping logic to handle all data soruces access logic. 
+2. Scraping Schedule: Implement a scheduling mechanism to periodically scrape and update data.
+3. Data Lake Integration : In larger setups, integrate with a data lake for scalable storage and processing.
